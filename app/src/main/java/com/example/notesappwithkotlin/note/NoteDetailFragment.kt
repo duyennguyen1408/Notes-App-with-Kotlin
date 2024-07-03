@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.notesappwithkotlin.R
 import com.example.notesappwithkotlin.databinding.FragmentNoteDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NoteDetailFragment : Fragment() {
 
     val TAG: String = "NoteDetailFragment"

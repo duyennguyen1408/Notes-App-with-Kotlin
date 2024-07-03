@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.notesappwithkotlin">
 
     <application
+        android:name="com.example.notesappwithkotlin.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,7 +14,7 @@
         android:theme="@style/Theme.NotesAppWithKotlin"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.notesappwithkotlin.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

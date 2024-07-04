@@ -78,6 +78,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    implementation(libs.androidx.viewpager)
     implementation(libs.androidx.constraintlayout)
 
     implementation(libs.androidx.lifecycle.livedata.ktx)
@@ -85,9 +86,18 @@ dependencies {
 
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
-//    implementation(libs.androidx.hilt.viewModel)
     kapt(libs.androidx.hilt.compiler)
 
+//    Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.firebase.database.ktx)
+
+//    Gson
+//    implementation(libs.gson)
+
+//    Image Picker
+//    implementation(libs.image.picker)
 }

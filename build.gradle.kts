@@ -10,6 +10,6 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.googleServices) apply false
     alias(libs.plugins.daggerHilt) apply false
-//    alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
 }

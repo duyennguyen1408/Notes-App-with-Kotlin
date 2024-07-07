@@ -26,6 +26,7 @@ class NoteListingFragment : Fragment() {
     val TAG: String = "NoteListingFragment"
     lateinit var binding: FragmentNoteListingBinding
     val viewModel: NoteViewModel by viewModels()
+    val authViewModel: AuthViewModel by viewModels()
     val adapter by lazy {
         NoteListingAdapter(
             onItemClicked = { pos, item ->
@@ -50,13 +51,22 @@ class NoteListingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        oberver()
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = staggeredGridLayoutManager
         binding.recyclerView.adapter = adapter
         binding.button.setOnClickListener {
             findNavController().navigate(R.id.action_noteListingFragment_to_noteDetailFragment)
         }
+        binding.logout.setOnClickListener {
+            authViewModel.logout {
+                findNavController().navigate(R.id.action_noteListingFragment_to_loginFragment)
+            }
+        }
         viewModel.getNotes()
+    }
+
+    private fun oberver(){
         viewModel.note.observe(viewLifecycleOwner) { state ->
             when(state){
                 is UiState.Loading -> {
@@ -73,4 +83,5 @@ class NoteListingFragment : Fragment() {
             }
         }
     }
+
 }

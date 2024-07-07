@@ -1,4 +1,4 @@
-package com.example.notesappwithkotlin.note
+package com.example.notesappwithkotlin.ui.note
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +13,7 @@ import javax.inject.Inject
 class NoteViewModel @Inject constructor(
     val repository: NoteRepository
 ): ViewModel() {
+
     private val _notes = MutableLiveData<UiState<List<Note>>>()
     val note: LiveData<UiState<List<Note>>>
         get() = _notes
@@ -44,8 +45,9 @@ class NoteViewModel @Inject constructor(
         repository.updateNote(note) { _updateNote.value = it }
     }
 
-    fun deleteNote(note: Note) {
+    fun deleteNote(note: Note){
         _deleteNote.value = UiState.Loading
         repository.deleteNote(note) { _deleteNote.value = it }
     }
+
 }

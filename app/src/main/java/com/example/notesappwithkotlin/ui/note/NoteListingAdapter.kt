@@ -1,4 +1,4 @@
-package com.example.notesappwithkotlin.note
+package com.example.notesappwithkotlin.ui.note
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import com.example.notesappwithkotlin.util.hide
 import java.text.SimpleDateFormat
 
 class NoteListingAdapter(
-    val onItemClicked: (Int, Note) -> Unit,
+    val onItemClicked: (Int, Note) -> Unit
 ) : RecyclerView.Adapter<NoteListingAdapter.MyViewHolder>() {
 
     val sdf = SimpleDateFormat("dd MMM yyyy")

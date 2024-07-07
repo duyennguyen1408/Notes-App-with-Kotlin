@@ -1,6 +1,6 @@
 package com.example.notesappwithkotlin.di
 
-import com.example.firebasewithmvvm.data.repository.AuthRepositoryImp
+import com.example.notesappwithkotlin.data.repository.AuthRepositoryImp
 import com.example.notesappwithkotlin.data.repository.AuthRepository
 import com.example.notesappwithkotlin.data.repository.NoteRepository
 import com.example.notesappwithkotlin.data.repository.NoteRepositoryImp

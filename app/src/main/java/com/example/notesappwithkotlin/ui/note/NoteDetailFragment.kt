@@ -1,4 +1,4 @@
-package com.example.notesappwithkotlin.note
+package com.example.notesappwithkotlin.ui.note
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

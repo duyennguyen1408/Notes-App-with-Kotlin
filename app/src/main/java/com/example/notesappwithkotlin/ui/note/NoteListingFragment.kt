@@ -1,4 +1,4 @@
-package com.example.notesappwithkotlin.note
+package com.example.notesappwithkotlin.ui.note
 
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.notesappwithkotlin.R
 import com.example.notesappwithkotlin.data.model.Note
 import com.example.notesappwithkotlin.databinding.FragmentNoteListingBinding
+import com.example.notesappwithkotlin.ui.auth.AuthViewModel
 import com.example.notesappwithkotlin.util.UiState
 import com.example.notesappwithkotlin.util.hide
 import com.example.notesappwithkotlin.util.show
@@ -25,8 +26,6 @@ class NoteListingFragment : Fragment() {
     val TAG: String = "NoteListingFragment"
     lateinit var binding: FragmentNoteListingBinding
     val viewModel: NoteViewModel by viewModels()
-    var deletePosition: Int = -1
-    var list: MutableList<Note> = arrayListOf()
     val adapter by lazy {
         NoteListingAdapter(
             onItemClicked = { pos, item ->
@@ -48,6 +47,7 @@ class NoteListingFragment : Fragment() {
             return binding.root
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)

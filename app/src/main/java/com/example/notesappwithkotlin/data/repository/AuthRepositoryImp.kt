@@ -1,4 +1,4 @@
-package com.example.firebasewithmvvm.data.repository
+package com.example.notesappwithkotlin.data.repository
 
 import com.example.notesappwithkotlin.data.model.User
 import com.example.notesappwithkotlin.util.FireStoreCollection
@@ -35,6 +35,7 @@ class AuthRepositoryImp(
                                 result.invoke(UiState.Failure(state.error))
                             }
                             is UiState.Loading -> {
+
                             }
                         }
                     }
@@ -80,8 +81,18 @@ class AuthRepositoryImp(
             }
     }
 
-    override fun loginUser(user: User, result: (UiState<String>) -> Unit) {
-
+    override fun loginUser(
+        email: String,
+        password: String,
+        result: (UiState<String>) -> Unit) {
+        auth.signInWithEmailAndPassword(email,password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    result.invoke(UiState.Success("Login successfully!"))
+                }
+            }.addOnFailureListener {
+                result.invoke(UiState.Failure("Authentication failed, Check email and password"))
+            }
     }
 
     override fun forgotPassword(user: User, result: (UiState<String>) -> Unit) {

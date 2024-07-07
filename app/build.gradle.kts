@@ -96,7 +96,7 @@ dependencies {
     implementation(libs.firebase.database.ktx)
 
 //    Gson
-//    implementation(libs.gson)
+    implementation(libs.gson)
 
 //    Image Picker
 //    implementation(libs.image.picker)

@@ -1,13 +1,14 @@
 package com.example.notesappwithkotlin.data.repository
 
 import com.example.notesappwithkotlin.data.model.Note
+import com.example.notesappwithkotlin.data.model.User
 import com.example.notesappwithkotlin.util.FireStoreCollection
 import com.example.notesappwithkotlin.util.FireStoreDocumentField
 import com.example.notesappwithkotlin.util.UiState
+import com.example.notesappwithkotlin.util.SharedPrefConstants
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.toObject
-import java.util.*
+import android.content.SharedPreferences
 
 class NoteRepositoryImp(
     val database: FirebaseFirestore

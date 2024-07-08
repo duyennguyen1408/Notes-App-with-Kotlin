@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.notesappwithkotlin.data.model.Task
 import com.example.notesappwithkotlin.databinding.FragmentTaskListingBinding
 import com.example.notesappwithkotlin.ui.auth.AuthViewModel
 import com.example.notesappwithkotlin.util.UiState
@@ -27,6 +28,7 @@ class TaskListingFragment : Fragment() {
     lateinit var binding: FragmentTaskListingBinding
     val adapter by lazy{
         TaskListingAdapter(
+            onItemClicked = { pos, item -> onTaskClicked(item)},
             onDeleteClicked = { pos, item -> }
         )
     }
@@ -89,6 +91,18 @@ class TaskListingFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun onTaskClicked(task: Task){
+        val createTaskFragmentSheet = CreateTaskFragment(task)
+        createTaskFragmentSheet.setDismissListener {
+            if (it) {
+                authViewModel.getSession {
+                    viewModel.getTasks(it)
+                }
+            }
+        }
+        createTaskFragmentSheet.show(childFragmentManager,"create_task")
     }
 
     companion object {

@@ -7,6 +7,7 @@ import com.example.notesappwithkotlin.data.model.Task
 import com.example.notesappwithkotlin.databinding.TaskLayoutBinding
 
 class TaskListingAdapter(
+    val onItemClicked: ((Int, Task) -> Unit)? = null,
     val onDeleteClicked: ((Int, Task) -> Unit)? = null,
 ) : RecyclerView.Adapter<TaskListingAdapter.MyViewHolder>() {
 
@@ -39,6 +40,9 @@ class TaskListingAdapter(
     inner class MyViewHolder(val binding: TaskLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Task,position: Int) {
             binding.title.setText(item.description)
+            binding.itemLayout.setOnClickListener {
+                onItemClicked?.invoke(position,item)
+            }
             binding.delete.setOnClickListener {
                 onDeleteClicked?.invoke(position,item)
             }

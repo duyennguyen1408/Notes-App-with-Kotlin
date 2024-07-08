@@ -5,14 +5,15 @@ import com.example.notesappwithkotlin.data.model.User
 import com.example.notesappwithkotlin.util.FireStoreCollection
 import com.example.notesappwithkotlin.util.FireStoreDocumentField
 import com.example.notesappwithkotlin.util.UiState
-import com.example.notesappwithkotlin.util.SharedPrefConstants
+import com.example.notesappwithkotlin.util.FirebaseStorageConstants.NOTE_IMAGES
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import android.content.SharedPreferences
 import android.net.Uri
 import com.google.firebase.FirebaseException
 import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
@@ -110,4 +111,30 @@ class NoteRepositoryImp(
             onResult.invoke(UiState.Failure(e.message))
         }
     }
+
+    override suspend fun uploadMultipleFile(
+        fileUri: List<Uri>,
+        onResult: (UiState<List<Uri>>) -> Unit
+    ) {
+        try {
+            val uri: List<Uri> = withContext(Dispatchers.IO) {
+                fileUri.map { image ->
+                    async {
+                        storageReference.child(NOTE_IMAGES).child(image.lastPathSegment ?: "${System.currentTimeMillis()}")
+                            .putFile(image)
+                            .await()
+                            .storage
+                            .downloadUrl
+                            .await()
+                    }
+                }.awaitAll()
+            }
+            onResult.invoke(UiState.Success(uri))
+        } catch (e: FirebaseException){
+            onResult.invoke(UiState.Failure(e.message))
+        }catch (e: Exception){
+            onResult.invoke(UiState.Failure(e.message))
+        }
+    }
+
 }

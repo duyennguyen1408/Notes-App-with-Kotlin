@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "138066396401",
+    "firebase_url": "https://notes-app-with-kotlin-default-rtdb.firebaseio.com",
     "project_id": "notes-app-with-kotlin",
     "storage_bucket": "notes-app-with-kotlin.appspot.com"
   },

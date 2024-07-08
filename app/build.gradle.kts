@@ -99,5 +99,7 @@ dependencies {
     implementation(libs.gson)
 
 //    Image Picker
-//    implementation(libs.image.picker)
+    implementation(libs.imagepicker)
+
+    implementation(libs.kotlinx.coroutines.play.services)
 }

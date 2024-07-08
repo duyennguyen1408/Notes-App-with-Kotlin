@@ -1,7 +1,10 @@
 package com.example.notesappwithkotlin.di
 
+import com.example.notesappwithkotlin.util.FirebaseStorageConstants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +26,9 @@ object FirebaseModule {
         return FirebaseAuth.getInstance()
     }
 
+    @Singleton
+    @Provides
+    fun provideFirebaseStroageInstance(): StorageReference {
+        return FirebaseStorage.getInstance().getReference(FirebaseStorageConstants.ROOT_DIRECTORY)
+    }
 }

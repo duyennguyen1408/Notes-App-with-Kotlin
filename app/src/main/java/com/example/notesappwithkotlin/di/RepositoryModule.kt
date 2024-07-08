@@ -5,7 +5,10 @@ import com.example.notesappwithkotlin.data.repository.AuthRepositoryImp
 import com.example.notesappwithkotlin.data.repository.AuthRepository
 import com.example.notesappwithkotlin.data.repository.NoteRepository
 import com.example.notesappwithkotlin.data.repository.NoteRepositoryImp
+import com.example.notesappwithkotlin.data.repository.TaskRepository
+import com.example.notesappwithkotlin.data.repository.TaskRepositoryImp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
@@ -18,6 +21,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object RepositoryModule {
+
     @Provides
     @Singleton
     fun provideNoteRepository(
@@ -25,6 +29,14 @@ object RepositoryModule {
         storageReference: StorageReference
     ): NoteRepository{
         return NoteRepositoryImp(database,storageReference)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTaskRepository(
+        database: FirebaseDatabase
+    ): TaskRepository{
+        return TaskRepositoryImp(database)
     }
 
     @Provides

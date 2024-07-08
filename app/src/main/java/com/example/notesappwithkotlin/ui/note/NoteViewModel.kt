@@ -1,12 +1,16 @@
 package com.example.notesappwithkotlin.ui.note
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.notesappwithkotlin.data.model.Note
+import com.example.notesappwithkotlin.data.model.User
 import com.example.notesappwithkotlin.data.repository.NoteRepository
 import com.example.notesappwithkotlin.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,9 +34,9 @@ class NoteViewModel @Inject constructor(
     val deleteNote: LiveData<UiState<String>>
         get() = _deleteNote
 
-    fun getNotes() {
+    fun getNotes(user: User?) {
         _notes.value = UiState.Loading
-        repository.getNotes { _notes.value = it }
+        repository.getNotes(user) { _notes.value = it }
     }
 
     fun addNote(note: Note){
@@ -48,6 +52,13 @@ class NoteViewModel @Inject constructor(
     fun deleteNote(note: Note){
         _deleteNote.value = UiState.Loading
         repository.deleteNote(note) { _deleteNote.value = it }
+    }
+
+    fun onUploadSingleFile(fileUris: Uri, onResult: (UiState<Uri>) -> Unit){
+        onResult.invoke(UiState.Loading)
+        viewModelScope.launch {
+            repository.uploadSingleFile(fileUris,onResult)
+        }
     }
 
 }

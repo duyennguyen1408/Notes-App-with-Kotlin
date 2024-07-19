@@ -9,7 +9,6 @@ import com.example.notesappwithkotlin.util.FireDatabase
 class TaskRepositoryImp(
     val database: FirebaseDatabase
 ) : TaskRepository {
-
     override fun addTask(task: Task, result: (UiState<Pair<Task,String>>) -> Unit) {
         val reference = database.reference.child(FireDatabase.TASK).push()
         val uniqueKey = reference.key ?: "invalid"
@@ -29,7 +28,6 @@ class TaskRepositoryImp(
                 )
             }
     }
-
     override fun updateTask(task: Task, result: (UiState<Pair<Task,String>>) -> Unit) {
         val reference = database.reference.child(FireDatabase.TASK).child(task.id)
         reference
@@ -47,7 +45,6 @@ class TaskRepositoryImp(
                 )
             }
     }
-
     override fun getTasks(user: User?, result: (UiState<List<Task>>) -> Unit) {
         val reference = database.reference.child(FireDatabase.TASK).orderByChild("user_id").equalTo(user?.id)
         reference.get()
@@ -67,7 +64,6 @@ class TaskRepositoryImp(
                 )
             }
     }
-
     override fun deleteTask(task: Task, result: (UiState<Pair<Task,String>>) -> Unit) {
         val reference = database.reference.child(FireDatabase.TASK).child(task.id)
         reference.removeValue()
@@ -85,3 +81,4 @@ class TaskRepositoryImp(
             }
     }
 }
+

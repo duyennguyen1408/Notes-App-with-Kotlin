@@ -7,3 +7,4 @@ data class User(
     val job_title: String = "",
     val email: String = "",
 )
+

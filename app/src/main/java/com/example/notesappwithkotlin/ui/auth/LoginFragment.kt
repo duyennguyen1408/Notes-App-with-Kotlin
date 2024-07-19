@@ -17,14 +17,11 @@ import com.example.notesappwithkotlin.util.hide
 import com.example.notesappwithkotlin.util.isValidEmail
 import com.example.notesappwithkotlin.util.show
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
-
     val TAG: String = "RegisterFragment"
     lateinit var binding: FragmentLoginBinding
     val viewModel: AuthViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +29,6 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observer()
@@ -44,16 +40,13 @@ class LoginFragment : Fragment() {
                 )
             }
         }
-
         binding.forgotPassLabel.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
-
         binding.registerLabel.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
-
     fun observer(){
         viewModel.login.observe(viewLifecycleOwner) { state ->
             when(state){
@@ -75,10 +68,8 @@ class LoginFragment : Fragment() {
             }
         }
     }
-
     fun validation(): Boolean {
         var isValid = true
-
         if (binding.emailEt.text.isNullOrEmpty()){
             isValid = false
             toast(getString(R.string.enter_email))
@@ -108,3 +99,17 @@ class LoginFragment : Fragment() {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

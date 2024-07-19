@@ -17,11 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ForgotPasswordFragment : Fragment() {
-
     val TAG: String = "ForgotPasswordFragment"
     lateinit var binding: FragmentForgotPasswordBinding
     val viewModel: AuthViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +27,6 @@ class ForgotPasswordFragment : Fragment() {
         binding = FragmentForgotPasswordBinding.inflate(layoutInflater)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observer()
@@ -39,7 +36,6 @@ class ForgotPasswordFragment : Fragment() {
             }
         }
     }
-
     private fun observer(){
         viewModel.forgotPassword.observe(viewLifecycleOwner) { state ->
             when(state){
@@ -60,10 +56,8 @@ class ForgotPasswordFragment : Fragment() {
             }
         }
     }
-
     fun validation(): Boolean {
         var isValid = true
-
         if (binding.emailEt.text.isNullOrEmpty()){
             isValid = false
             toast(getString(R.string.enter_email))
@@ -73,9 +67,15 @@ class ForgotPasswordFragment : Fragment() {
                 toast(getString(R.string.invalid_email))
             }
         }
-
         return isValid
     }
-
-
 }
+
+
+
+
+
+
+
+
+

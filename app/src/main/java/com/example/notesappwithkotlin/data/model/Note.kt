@@ -18,3 +18,4 @@ data class Note(
     @ServerTimestamp
     val date: Date = Date(),
 ) : Parcelable
+

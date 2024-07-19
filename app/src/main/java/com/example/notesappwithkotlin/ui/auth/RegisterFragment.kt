@@ -17,14 +17,11 @@ import com.example.notesappwithkotlin.util.show
 import com.example.notesappwithkotlin.util.toast
 //import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
-
     val TAG: String = "RegisterFragment"
     lateinit var binding: FragmentRegisterBinding
     val viewModel: AuthViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +29,6 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(layoutInflater)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observer()
@@ -46,7 +42,6 @@ class RegisterFragment : Fragment() {
             }
         }
     }
-
     fun observer() {
         viewModel.register.observe(viewLifecycleOwner) { state ->
             when(state){
@@ -68,17 +63,14 @@ class RegisterFragment : Fragment() {
             }
         }
     }
-
     fun getUserObj(): User {
         return User(
             id = "",
             first_name = binding.firstNameEt.text.toString(),
             last_name = binding.lastNameEt.text.toString(),
-            job_title = binding.jobTitleEt.text.toString(),
             email = binding.emailEt.text.toString(),
         )
     }
-
     fun validation(): Boolean {
         var isValid = true
 
@@ -86,17 +78,10 @@ class RegisterFragment : Fragment() {
             isValid = false
             toast(getString(R.string.enter_first_name))
         }
-
         if (binding.lastNameEt.text.isNullOrEmpty()){
             isValid = false
             toast(getString(R.string.enter_last_name))
         }
-
-        if (binding.jobTitleEt.text.isNullOrEmpty()){
-            isValid = false
-            toast(getString(R.string.enter_job_title))
-        }
-
         if (binding.emailEt.text.isNullOrEmpty()){
             isValid = false
             toast(getString(R.string.enter_email))
@@ -117,5 +102,5 @@ class RegisterFragment : Fragment() {
         }
         return isValid
     }
-
 }
+

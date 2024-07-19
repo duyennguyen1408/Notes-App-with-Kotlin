@@ -22,10 +22,8 @@ import com.example.notesappwithkotlin.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_PARAM1 = "param1"
-
 @AndroidEntryPoint
 class NoteListingFragment : Fragment() {
-
     val TAG: String = "NoteListingFragment"
     var param1: String? = null
     lateinit var binding: FragmentNoteListingBinding
@@ -40,14 +38,12 @@ class NoteListingFragment : Fragment() {
             }
         )
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,7 +55,6 @@ class NoteListingFragment : Fragment() {
             return binding.root
         }
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         oberver()
@@ -74,7 +69,6 @@ class NoteListingFragment : Fragment() {
             viewModel.getNotes(it)
         }
     }
-
     private fun oberver(){
         viewModel.note.observe(viewLifecycleOwner) { state ->
             when(state){
@@ -92,7 +86,6 @@ class NoteListingFragment : Fragment() {
             }
         }
     }
-
     companion object {
         @JvmStatic
         fun newInstance(param1: String) =
@@ -103,3 +96,6 @@ class NoteListingFragment : Fragment() {
             }
     }
 }
+
+
+

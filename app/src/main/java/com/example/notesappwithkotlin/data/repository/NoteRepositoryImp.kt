@@ -21,7 +21,6 @@ class NoteRepositoryImp(
     val database: FirebaseFirestore,
     val storageReference: StorageReference
 ) : NoteRepository {
-
     override fun getNotes(user: User?, result: (UiState<List<Note>>) -> Unit) {
         database.collection(FireStoreCollection.NOTE)
             .whereEqualTo(FireStoreDocumentField.USER_ID,user?.id)
@@ -45,7 +44,6 @@ class NoteRepositoryImp(
                 )
             }
     }
-
     override fun addNote(note: Note, result: (UiState<Pair<Note,String>>) -> Unit) {
         val document = database.collection(FireStoreCollection.NOTE).document()
         note.id = document.id
@@ -64,7 +62,6 @@ class NoteRepositoryImp(
                 )
             }
     }
-
     override fun updateNote(note: Note, result: (UiState<String>) -> Unit) {
         val document = database.collection(FireStoreCollection.NOTE).document(note.id)
         document
@@ -82,7 +79,6 @@ class NoteRepositoryImp(
                 )
             }
     }
-
     override fun deleteNote(note: Note, result: (UiState<String>) -> Unit) {
         database.collection(FireStoreCollection.NOTE).document(note.id)
             .delete()
@@ -93,7 +89,6 @@ class NoteRepositoryImp(
                 result.invoke(UiState.Failure(e.message))
             }
     }
-
     override suspend fun uploadSingleFile(fileUri: Uri, onResult: (UiState<Uri>) -> Unit) {
         try {
             val uri: Uri = withContext(Dispatchers.IO) {
@@ -111,7 +106,6 @@ class NoteRepositoryImp(
             onResult.invoke(UiState.Failure(e.message))
         }
     }
-
     override suspend fun uploadMultipleFile(
         fileUri: List<Uri>,
         onResult: (UiState<List<Uri>>) -> Unit
@@ -136,5 +130,4 @@ class NoteRepositoryImp(
             onResult.invoke(UiState.Failure(e.message))
         }
     }
-
 }

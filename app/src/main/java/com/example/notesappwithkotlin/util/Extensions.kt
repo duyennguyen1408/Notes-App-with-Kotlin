@@ -17,26 +17,22 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.example.notesappwithkotlin.R
 
+//Simplifies the process of changing view visibility and enabled state.
 fun View.hide(){
     visibility = View.GONE
 }
-
 fun View.show(){
     visibility = View.VISIBLE
 }
-
 fun View.disable(){
     isEnabled = false
 }
-
 fun View.enabled(){
     isEnabled = true
 }
-
 fun Fragment.toast(msg: String?){
     Toast.makeText(requireContext(),msg,Toast.LENGTH_LONG).show()
-}
-
+}//Provides an easy way to show toast messages within fragments.
 fun ChipGroup.addChip(
     text: String,
     isTouchTargeSize: Boolean = false,
@@ -52,8 +48,7 @@ fun ChipGroup.addChip(
         chip.setOnCloseIconClickListener(closeIconListener)
     }
     addView(chip)
-}
-
+}//Facilitates adding chips to a ChipGroup with customizable options.
 fun Context.createDialog(layout: Int, cancelable: Boolean): Dialog {
     val dialog = Dialog(this, android.R.style.Theme_Dialog)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -66,13 +61,11 @@ fun Context.createDialog(layout: Int, cancelable: Boolean): Dialog {
     dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     dialog.setCancelable(cancelable)
     return dialog
-}
-
-val Int.dpToPx: Int
+}//Creates a custom dialog with specified layout and properties.
+val Int.dpToPx: Int //Converts dp to px and vice versa for proper UI scaling.
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
-
 val Int.pxToDp: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
-
 fun String.isValidEmail() =
     isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+//Validates if a string is a correctly formatted email address.

@@ -35,7 +35,6 @@ import java.util.Date
 
 @AndroidEntryPoint
 class NoteDetailFragment : Fragment() {
-
     val TAG: String = "NoteDetailFragment"
     lateinit var binding: FragmentNoteDetailBinding
     val viewModel: NoteViewModel by viewModels()
@@ -48,7 +47,6 @@ class NoteDetailFragment : Fragment() {
             onCancelClicked = { pos, item -> onRemoveImage(pos,item)}
         )
     }
-
     private val startForProfileImageResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
         val resultCode = result.resultCode
         val data = result.data
@@ -65,7 +63,6 @@ class NoteDetailFragment : Fragment() {
             Log.e(TAG,"Task Cancelled")
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,13 +74,11 @@ class NoteDetailFragment : Fragment() {
             return binding.root
         }
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         updateUI()
         observer()
     }
-
     private fun observer() {
         viewModel.addNote.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -141,7 +136,6 @@ class NoteDetailFragment : Fragment() {
             }
         }
     }
-
     private fun updateUI() {
         val sdf = SimpleDateFormat("dd MMM yyyy . hh:mm a")
         objNote = arguments?.getParcelable("note")
@@ -215,14 +209,12 @@ class NoteDetailFragment : Fragment() {
             binding.edit.hide()
         }
     }
-
     private fun onRemoveImage(pos: Int, item: Uri) {
         adapter.removeItem(pos)
         if (objNote != null){
             binding.edit.performClick()
         }
     }
-
     private fun showAddTagDialog(){
         val dialog = requireContext().createDialog(R.layout.add_tag_dialog, true)
         val button = dialog.findViewById<MaterialButton>(R.id.tag_dialog_add)
@@ -254,7 +246,6 @@ class NoteDetailFragment : Fragment() {
         }
         dialog.show()
     }
-
     private fun addTags(note: MutableList<String>) {
         if (note.size > 0) {
             binding.tags.apply {
@@ -270,7 +261,6 @@ class NoteDetailFragment : Fragment() {
             }
         }
     }
-
     private fun isMakeEnableUI(isDisable: Boolean = false) {
         binding.title.isEnabled = isDisable
         binding.date.isEnabled = isDisable
@@ -278,7 +268,6 @@ class NoteDetailFragment : Fragment() {
         binding.addTagLl.isEnabled = isDisable
         binding.description.isEnabled = isDisable
     }
-
     private fun validation(): Boolean {
         var isValid = true
         if (binding.title.text.toString().isNullOrEmpty()) {
@@ -291,7 +280,6 @@ class NoteDetailFragment : Fragment() {
         }
         return isValid
     }
-
     private fun getNote(): Note {
         return Note(
             id = objNote?.id ?: "",
@@ -302,7 +290,6 @@ class NoteDetailFragment : Fragment() {
             date = Date()
         ).apply { authViewModel.getSession { this.user_id = it?.id ?: "" } }
     }
-
     private fun getImageUrls(): List<String> {
         if (imageUris.isNotEmpty()){
             return imageUris.map { it.toString() }
@@ -310,7 +297,6 @@ class NoteDetailFragment : Fragment() {
             return objNote?.images ?: arrayListOf()
         }
     }
-
     private fun onDonePressed() {
         if (imageUris.isNotEmpty()){
             viewModel.onUploadMultipleFile(imageUris){ state ->
@@ -341,3 +327,4 @@ class NoteDetailFragment : Fragment() {
         }
     }
 }
+

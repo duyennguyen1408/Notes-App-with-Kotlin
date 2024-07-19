@@ -58,7 +58,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -78,12 +77,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+//    Jetpack Components
     implementation(libs.androidx.viewpager)
     implementation(libs.androidx.constraintlayout)
 
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.fragment)
 
+//    Dagger Hilt
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
     kapt(libs.androidx.hilt.compiler)
@@ -103,3 +104,10 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.play.services)
 }
+
+
+
+
+
+
+

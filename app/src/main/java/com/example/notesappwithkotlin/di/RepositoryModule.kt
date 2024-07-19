@@ -21,7 +21,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object RepositoryModule {
-
     @Provides
     @Singleton
     fun provideNoteRepository(
@@ -30,7 +29,6 @@ object RepositoryModule {
     ): NoteRepository{
         return NoteRepositoryImp(database,storageReference)
     }
-
     @Provides
     @Singleton
     fun provideTaskRepository(
@@ -38,10 +36,9 @@ object RepositoryModule {
     ): TaskRepository{
         return TaskRepositoryImp(database)
     }
-
     @Provides
     @Singleton
-    fun provideAutghRepository(
+    fun provideAuthRepository(
         database: FirebaseFirestore,
         auth: FirebaseAuth,
         appPreferences: SharedPreferences,

@@ -3,13 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/initialFragment">
+
+    <fragment
+        android:id="@+id/initialFragment"
+        android:name="com.example.notesappwithkotlin.ui.init.InitialFragment"
+        android:label="fragment_initial"
+        tools:layout="@layout/fragment_initial">
+        <action
+            android:id="@+id/action_initialFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_initialFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.notesappwithkotlin.ui.auth.RegisterFragment"
-        android:label="RegisterFragment" >
-
+        android:label="RegisterFragment">
         <action
             android:id="@+id/action_registerFragment_to_home_navigation"
             app:destination="@id/home_navigation" />
@@ -19,7 +31,7 @@
         android:id="@+id/loginFragment"
         android:name="com.example.notesappwithkotlin.ui.auth.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -38,5 +50,4 @@
         tools:layout="@layout/fragment_forgot_password" />
 
     <include app:graph="@navigation/home_navigation" />
-
 </navigation>
